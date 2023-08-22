@@ -1,4 +1,4 @@
-package ke.newsarticles.designs
+package ke.newsarticles.core_utils.designs
 
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Shapes

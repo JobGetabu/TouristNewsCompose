@@ -39,7 +39,7 @@ import coil.compose.SubcomposeAsyncImageContent
 import ke.newsarticles.core_resourses.R
 import ke.newsarticles.core_utils.navigation.UiEvent
 import ke.newsarticles.core_utils.utils.TimeUtils
-import ke.newsarticles.designs.NewsArticlesTheme
+import ke.newsarticles.core_utils.designs.NewsArticlesTheme
 import ke.newsarticles.feature_tourist.domain.models.TouristModel
 
 @Composable

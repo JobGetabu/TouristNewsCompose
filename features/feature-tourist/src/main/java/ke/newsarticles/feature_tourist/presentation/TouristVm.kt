@@ -1,5 +1,7 @@
 package ke.newsarticles.feature_tourist.presentation
 
+import android.util.Log
+import android.widget.Toast
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -28,6 +30,7 @@ class TouristVm  @Inject constructor(private val touristRepository: TouristRepos
     init {
         fetchTourists()
         listenToDbUpdates()
+        Log.e("TAG", ": init")
     }
 
     private fun fetchTourists(){
@@ -43,8 +46,10 @@ class TouristVm  @Inject constructor(private val touristRepository: TouristRepos
     }
 
     private fun listenToDbUpdates() {
+        Log.e("TAG", "listenToDbUpdates: b4")
         viewModelScope.launch {
             touristRepository.listenForTourists().collectLatest { tourist ->
+                Log.e("TAG", "listenToDbUpdates: $tourist")
                 if (tourist.isNotEmpty()) {
                     _touristUiState.update {
                         it.copy(isLoading = false, errorMessage = null, tourist = tourist)

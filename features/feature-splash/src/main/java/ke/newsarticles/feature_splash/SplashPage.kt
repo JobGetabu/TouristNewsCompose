@@ -14,10 +14,11 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import ke.newsarticles.core_resourses.R
 import ke.newsarticles.core_utils.navigation.Routes
 import ke.newsarticles.core_utils.navigation.UiEvent
-import ke.newsarticles.designs.Ascent
-import ke.newsarticles.designs.NewsArticlesTheme
+import ke.newsarticles.core_utils.designs.Ascent
+import ke.newsarticles.core_utils.designs.NewsArticlesTheme
 import kotlinx.coroutines.delay
 
 @Composable
@@ -42,7 +43,7 @@ fun SplashPage(
         ) {
 
             Image(
-                painter = painterResource(id = ke.newsarticles.core_resourses.R.drawable.ic_logo),
+                painter = painterResource(id = R.drawable.ic_logo),
                 contentDescription = "logo",
                 modifier = Modifier
                     .height(70.dp)
@@ -51,7 +52,7 @@ fun SplashPage(
                 colorFilter = ColorFilter.tint(Ascent)
             )
             Text(
-                text = stringResource(id = ke.newsarticles.core_resourses.R.string.app_name),
+                text = stringResource(id = R.string.app_name),
                 style = MaterialTheme.typography.h2.copy(color = Ascent)
             )
         }

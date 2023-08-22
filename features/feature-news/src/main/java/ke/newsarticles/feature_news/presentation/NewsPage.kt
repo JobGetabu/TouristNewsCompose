@@ -38,8 +38,9 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import coil.compose.AsyncImagePainter
 import coil.compose.SubcomposeAsyncImage
 import coil.compose.SubcomposeAsyncImageContent
+import ke.newsarticles.core_resourses.R
 import ke.newsarticles.core_utils.navigation.UiEvent
-import ke.newsarticles.designs.NewsArticlesTheme
+import ke.newsarticles.core_utils.designs.NewsArticlesTheme
 import ke.newsarticles.feature_news.domain.models.NewsModel
 
 @Composable
@@ -60,7 +61,7 @@ fun NewsPage(
             ) {
                 Text(
                     modifier = Modifier.padding(bottom = 10.dp, top = 16.dp, start = 10.dp),
-                    text = stringResource(ke.newsarticles.core_resourses.R.string.articles),
+                    text = stringResource(R.string.articles),
                     style = MaterialTheme.typography.h1.copy(fontSize = 30.sp)
                 )
 
@@ -133,7 +134,7 @@ fun NewsItem(modifier: Modifier, article: NewsModel, onItemClick: (NewsModel) ->
                 modifier = Modifier.weight(1f),
                 text = article.title ?: "",
                 style = MaterialTheme.typography.h2.copy(
-                    color = Color.Black,
+                    color = MaterialTheme.colors.onSurface,
                     fontSize = 18.sp,
                     fontWeight = FontWeight.SemiBold
                 ),

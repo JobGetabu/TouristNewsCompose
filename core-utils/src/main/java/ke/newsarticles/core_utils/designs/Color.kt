@@ -1,4 +1,4 @@
-package ke.newsarticles.designs
+package ke.newsarticles.core_utils.designs
 
 import androidx.compose.ui.graphics.Color
 
