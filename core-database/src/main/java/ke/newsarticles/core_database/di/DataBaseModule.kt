@@ -9,6 +9,7 @@ import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import ke.newsarticles.core_database.data.dao.NewsModelDao
+import ke.newsarticles.core_database.data.dao.RemoteKeysDao
 import ke.newsarticles.core_database.data.dao.TouristDao
 import javax.inject.Singleton
 
@@ -28,4 +29,8 @@ object DataBaseModule {
     @Singleton
     @Provides
     fun provideNewsModelDao(appDatabase: AppDatabase): NewsModelDao = appDatabase.provideNewsModelDao()
+
+    @Singleton
+    @Provides
+    fun provideRemoteKeysDao(appDatabase: AppDatabase): RemoteKeysDao = appDatabase.provideRemoteKeysDaoDao()
 }

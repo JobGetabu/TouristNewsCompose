@@ -45,6 +45,7 @@ class TouristVm  @Inject constructor(private val touristRepository: TouristRepos
         }
     }
 
+    //A non paging implementation
     private fun listenToDbUpdates() {
         Log.e("TAG", "listenToDbUpdates: b4")
         viewModelScope.launch {
@@ -58,4 +59,7 @@ class TouristVm  @Inject constructor(private val touristRepository: TouristRepos
             }
         }
     }
+
+    //A paged implementation
+    fun getTourists() = touristRepository.getTouristArticlesPaged()
 }

@@ -65,6 +65,11 @@ dependencies {
     implementation(Dependencies.retrofitKotlinSerialization)
     implementation(Dependencies.retrofit)
 
+    implementation(Dependencies.paging)
+    implementation(Dependencies.pagingCompose)
+
+    implementation(Dependencies.roomKtx)
+
     implementation(project(mapOf("path" to ":core-utils")))
     implementation(project(mapOf("path" to ":core-database")))
     implementation(project(mapOf("path" to ":core-network")))

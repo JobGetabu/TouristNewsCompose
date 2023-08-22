@@ -35,12 +35,15 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.paging.compose.collectAsLazyPagingItems
+import androidx.paging.compose.items
 import coil.compose.AsyncImagePainter
 import coil.compose.SubcomposeAsyncImage
 import coil.compose.SubcomposeAsyncImageContent
 import ke.newsarticles.core_resourses.R
 import ke.newsarticles.core_utils.navigation.UiEvent
 import ke.newsarticles.core_utils.designs.NewsArticlesTheme
+import ke.newsarticles.feature_news.data.mappers.toNewsModel
 import ke.newsarticles.feature_news.domain.models.NewsModel
 
 @Composable
@@ -50,6 +53,7 @@ fun NewsPage(
     onNavigate: (UiEvent.OnNavigate) -> Unit
 ) {
     val newsUiState = viewModel.newsUiState.collectAsState()
+    val newsItems = viewModel.getNews().collectAsLazyPagingItems()
 
     NewsArticlesTheme {
         Box {
@@ -68,50 +72,30 @@ fun NewsPage(
                 Divider(thickness = 1.dp)
                 Spacer(modifier = Modifier.height(10.dp))
 
-                // loading
-                if (newsUiState.value.isLoading) {
-                    Box(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .fillMaxHeight(),
-                        contentAlignment = Alignment.Center
-                    ) {
-                        CircularProgressIndicator(
-                            modifier = Modifier
-                                .height(40.dp)
-                                .width(40.dp)
-                        )
-                    }
-                }
+                // TODO loading UI logic
+                //LoadingUI()
+                // TODO error handling UI logic
+                //ErrorUI()
 
-                if (newsUiState.value.errorMessage != null && newsUiState.value.news.isEmpty()) Box(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .fillMaxHeight(),
-                    contentAlignment = Alignment.Center
+                LazyColumn(
+                    verticalArrangement = Arrangement.spacedBy(16.dp),
+                    contentPadding = PaddingValues(10.dp)
                 ) {
-                    Text(text = newsUiState.value.errorMessage ?: "")
-                }
+                    items(
+                        items = newsItems
+                        /*, key = { listItem -> listItem.id!! }*/
+                    ) { article ->
 
-                if (newsUiState.value.news.isNotEmpty()) {
-                    val news = newsUiState.value.news
-                    LazyColumn(
-                        verticalArrangement = Arrangement.spacedBy(16.dp),
-                        contentPadding = PaddingValues(10.dp)
-                    ) {
-                        items(items = news, key = { listItem -> listItem.id!! }) { article ->
-
-                            NewsItem(
-                                modifier = modifier, article
-                            ) {
-                                onNavigate.invoke(
-                                    UiEvent.OnNavigate(
-                                        "article_page?id=${article.id}"
-                                    )
+                        NewsItem(
+                            modifier = modifier, article?.toNewsModel()!!
+                        ) {
+                            onNavigate.invoke(
+                                UiEvent.OnNavigate(
+                                    "article_page?id=${article.id}"
                                 )
-                            }
-
+                            )
                         }
+
                     }
                 }
             }
@@ -267,4 +251,36 @@ fun PreviewChatPage() {
     NewsPage() {
 
     }
+}
+
+@Composable
+fun ErrorUI() {
+/*
+*  if (newsUiState.value.errorMessage != null && newsUiState.value.news.isEmpty()) Box(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .fillMaxHeight(),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Text(text = newsUiState.value.errorMessage ?: "")
+                }*/
+}
+
+@Composable
+fun LoadingUI() {
+    /*
+    * if (newsUiState.value.isLoading) {
+                    Box(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .fillMaxHeight(),
+                        contentAlignment = Alignment.Center
+                    ) {
+                        CircularProgressIndicator(
+                            modifier = Modifier
+                                .height(40.dp)
+                                .width(40.dp)
+                        )
+                    }
+                }*/
 }

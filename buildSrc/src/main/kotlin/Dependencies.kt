@@ -64,6 +64,11 @@ object Dependencies {
     const val roomKtx = "androidx.room:room-ktx:${Versions.room}"
     const val roomKRuntime = "androidx.room:room-ktx:${Versions.room}"
     const val roomCompiler = "androidx.room:room-compiler:${Versions.room}"
+    const val roomPaging = "androidx.room:room-paging:${Versions.room}"
+
+    //paging
+    const val paging = "androidx.paging:paging-runtime:3.1.1"
+    const val pagingCompose = "androidx.paging:paging-compose:1.0.0-alpha16"
 
     // test
     const val coreTest = "androidx.test:core-ktx:1.4.0"

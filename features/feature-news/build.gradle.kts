@@ -62,6 +62,11 @@ dependencies {
     implementation(Dependencies.coroutinesCore)
     implementation(Dependencies.lifecycleRuntime)
 
+    implementation(Dependencies.paging)
+    implementation(Dependencies.pagingCompose)
+
+    implementation(Dependencies.roomKtx)
+
     implementation(project(mapOf("path" to ":core-network")))
     implementation(project(mapOf("path" to ":core-utils")))
     implementation(project(mapOf("path" to ":core-database")))

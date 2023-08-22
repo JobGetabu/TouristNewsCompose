@@ -33,6 +33,8 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.paging.compose.collectAsLazyPagingItems
+import androidx.paging.compose.items
 import coil.compose.AsyncImagePainter
 import coil.compose.SubcomposeAsyncImage
 import coil.compose.SubcomposeAsyncImageContent
@@ -40,6 +42,7 @@ import ke.newsarticles.core_resourses.R
 import ke.newsarticles.core_utils.navigation.UiEvent
 import ke.newsarticles.core_utils.utils.TimeUtils
 import ke.newsarticles.core_utils.designs.NewsArticlesTheme
+import ke.newsarticles.feature_tourist.data.mappers.toTouristModel
 import ke.newsarticles.feature_tourist.domain.models.TouristModel
 
 @Composable
@@ -47,61 +50,40 @@ fun TouristPage(
     modifier: Modifier = Modifier,
     viewModel: TouristVm = hiltViewModel(),
     onNavigate: (UiEvent.OnNavigate) -> Unit
-){
+) {
     val touristUiState = viewModel.touristUiState.collectAsState()
+    val touristItems = viewModel.getTourists().collectAsLazyPagingItems()
 
     NewsArticlesTheme {
-     Box {
-        Column(
-            modifier = Modifier
-                .background(MaterialTheme.colors.background)
-                .padding(bottom = 56.dp)
-                .fillMaxSize()
-        ) {
-            Text(
-                modifier = Modifier.padding(bottom = 10.dp, top = 16.dp, start = 10.dp),
-                text = stringResource(R.string.tourist),
-                style = MaterialTheme.typography.h1.copy(fontSize = 30.sp)
-            )
-
-            Divider(thickness = 1.dp)
-            Spacer(modifier = Modifier.height(10.dp))
-
-            // loading
-            if (touristUiState.value.isLoading) {
-                Box(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .fillMaxHeight(),
-                    contentAlignment = Alignment.Center
-                ) {
-                    CircularProgressIndicator(
-                        modifier = Modifier
-                            .height(40.dp)
-                            .width(40.dp)
-                    )
-                }
-            }
-
-            if (touristUiState.value.errorMessage != null && touristUiState.value.tourist.isEmpty()) Box(
+        Box {
+            Column(
                 modifier = Modifier
-                    .fillMaxWidth()
-                    .fillMaxHeight(),
-                contentAlignment = Alignment.Center
+                    .background(MaterialTheme.colors.background)
+                    .padding(bottom = 56.dp)
+                    .fillMaxSize()
             ) {
-                Text(text = touristUiState.value.errorMessage ?: "")
-            }
+                Text(
+                    modifier = Modifier.padding(bottom = 10.dp, top = 16.dp, start = 10.dp),
+                    text = stringResource(R.string.tourist),
+                    style = MaterialTheme.typography.h1.copy(fontSize = 30.sp)
+                )
 
-            if (touristUiState.value.tourist.isNotEmpty()) {
-                val tourists = touristUiState.value.tourist
+                Divider(thickness = 1.dp)
+                Spacer(modifier = Modifier.height(10.dp))
+
+                // TODO loading UI logic
+                //LoadingUI()
+                // TODO error handling UI logic
+                //ErrorUI()
+
                 LazyColumn(
                     verticalArrangement = Arrangement.spacedBy(16.dp),
                     contentPadding = PaddingValues(10.dp)
                 ) {
-                    items(items = tourists, key = { listItem -> listItem.id!! }) { person ->
+                    items(items = touristItems, key = { listItem -> listItem.id!! }) { person ->
 
                         PersonCard(
-                            modifier = modifier, person
+                            modifier = modifier, person?.toTouristModel()!!
                         ) {
                             onNavigate.invoke(
                                 UiEvent.OnNavigate(
@@ -114,7 +96,6 @@ fun TouristPage(
                 }
             }
         }
-     }
     }
 }
 
@@ -198,7 +179,13 @@ fun PersonCard(modifier: Modifier, person: TouristModel, onItemClick: (TouristMo
                 )
 
                 Text(
-                    text = "Since: ${TimeUtils.formatDate("${person.createdat}", "yyyy-MM-dd'T'HH:mm:ss.SSSSSSS", "E,MMM yyyy HH:mm")}",
+                    text = "Since: ${
+                        TimeUtils.formatDate(
+                            "${person.createdat}",
+                            "yyyy-MM-dd'T'HH:mm:ss.SSSSSSS",
+                            "E,MMM yyyy HH:mm"
+                        )
+                    }",
                     style = MaterialTheme.typography.h3.copy(
                         color = Color.DarkGray,
                         fontSize = 12.sp
@@ -214,4 +201,36 @@ fun PersonCard(modifier: Modifier, person: TouristModel, onItemClick: (TouristMo
             )
         }
     }
+}
+
+@Composable
+fun ErrorUI() {
+    /*
+    *  if (newsUiState.value.errorMessage != null && newsUiState.value.news.isEmpty()) Box(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .fillMaxHeight(),
+                        contentAlignment = Alignment.Center
+                    ) {
+                        Text(text = newsUiState.value.errorMessage ?: "")
+                    }*/
+}
+
+@Composable
+fun LoadingUI() {
+    /*
+    * if (newsUiState.value.isLoading) {
+                    Box(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .fillMaxHeight(),
+                        contentAlignment = Alignment.Center
+                    ) {
+                        CircularProgressIndicator(
+                            modifier = Modifier
+                                .height(40.dp)
+                                .width(40.dp)
+                        )
+                    }
+                }*/
 }

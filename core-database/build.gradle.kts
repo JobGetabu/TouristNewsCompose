@@ -52,8 +52,11 @@ dependencies {
     implementation(Dependencies.roomKtx)
     kapt(Dependencies.roomCompiler)
     implementation(Dependencies.roomKRuntime)
+    implementation(Dependencies.roomPaging)
 
     implementation(Dependencies.kotlinSerializationJson)
+
+    implementation(Dependencies.paging)
 
     implementation( Dependencies.coreTest )
 }

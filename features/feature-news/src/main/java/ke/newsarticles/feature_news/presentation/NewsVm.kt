@@ -25,10 +25,6 @@ class NewsVm @Inject constructor(private val newsRepository: NewsRepository) : V
     private val _newsUiState = MutableStateFlow(NewsUiState())
     val newsUiState = _newsUiState.asStateFlow()
 
-    init {
-        fetchNews()
-        listenToDbUpdates()
-    }
 
     private fun fetchNews(){
         viewModelScope.launch{
@@ -42,6 +38,7 @@ class NewsVm @Inject constructor(private val newsRepository: NewsRepository) : V
         }
     }
 
+    //A non paging implementation
     private fun listenToDbUpdates() {
         viewModelScope.launch {
             newsRepository.listenForNewsArticles().collectLatest { news ->
@@ -53,5 +50,8 @@ class NewsVm @Inject constructor(private val newsRepository: NewsRepository) : V
             }
         }
     }
+
+    //A paged implementation
+    fun getNews() = newsRepository.getNewsArticlesPaged()
 
 }
