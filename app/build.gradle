@@ -1,0 +1,76 @@
+plugins {
+    id 'com.android.application'
+    id 'org.jetbrains.kotlin.android'
+    id 'kotlin-kapt'
+    id 'com.google.dagger.hilt.android'
+}
+
+android {
+    namespace 'ke.newsarticles'
+    compileSdk Configs.compileSdk
+
+    defaultConfig {
+        applicationId "ke.newsarticles"
+        minSdk Configs.minSdk
+        targetSdk Configs.targetSdk
+        versionCode Configs.versionCode
+        versionName Configs.versionName
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        vectorDrawables {
+            useSupportLibrary true
+        }
+    }
+
+    buildTypes {
+        debug {
+
+        }
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+    buildFeatures {
+        compose true
+    }
+    composeOptions {
+        kotlinCompilerExtensionVersion Versions.COMPOSE_COMPILER
+    }
+    packagingOptions {
+        resources {
+            excludes += '/META-INF/{AL2.0,LGPL2.1}'
+        }
+    }
+}
+
+dependencies {
+    implementation(Dependencies.ktxCore)
+    implementation(Dependencies.lifecycleRuntime)
+    implementation(Dependencies.activityCompose)
+    implementation(Dependencies.composeUi)
+    implementation(Dependencies.composeToolingPreview)
+    implementation(Dependencies.composeNavigation)
+    implementation(Dependencies.composeMaterial)
+    debugImplementation(Dependencies.composeTooling)
+    debugImplementation(Dependencies.accompanist)
+
+    //Dagger - Hilt
+    implementation Dependencies.hilt
+    kapt Dependencies.hiltCompiler
+    implementation Dependencies.hiltNavigationCompose
+
+    implementation project(path: ":features:feature-home")
+    implementation project(path: ":features:feature-splash")
+    implementation project(path: ":features:feature-tourist")
+    implementation project(path: ":features:feature-news")
+    implementation project(path: ":core-resourses")
+    implementation project(path: ":core-utils")
+}

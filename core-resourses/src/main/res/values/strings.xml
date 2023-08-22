@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Tourist NewsArticles</string>
+    <string name="articles">Articles</string>
+    <string name="article_image_content_description">article_image_content_description</string>
+    <string name="tourist">Tourists</string>
+    <string name="submit">Submit</string>
+    <string name="avator">https://img.freepik.com/free-icon/user_318-159711.jpg?t=st=1692661505~exp=1692662105~hmac=7b89715c633977df129a8570342f0b63b2998f383b3d2299737f75641c052378</string>
+</resources>

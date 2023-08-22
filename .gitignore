@@ -1,0 +1,162 @@
+*.iml
+.gradle
+/local.properties
+/.idea/caches
+/.idea/libraries
+/.idea/modules.xml
+/.idea/workspace.xml
+/.idea/navEditor.xml
+/.idea/assetWizardSettings.xml
+.DS_Store
+/build
+/captures
+.externalNativeBuild
+.cxx
+local.properties
+
+#mine
+# Built application files
+*.apk
+*.ap_
+
+# Files for the Dalvik VM
+*.dex
+
+# Java class files
+*.class
+
+# Generated files
+bin/
+gen/
+out/
+build/
+
+# Gradle files
+.gradle/
+gradle/
+gradlew
+gradlew.bat
+local.properties
+
+# Android Studio files
+*.iml
+.idea/
+.idea_modules/
+*.ipr
+*.iws
+.idea_modules/
+
+# Proguard files
+proguard/
+proguard-project.txt
+
+# Log files
+*.log
+
+# Android Studio profiler
+*.hprof
+
+# Android NDK
+obj/
+jniLibs/
+
+# Android emulator files
+*.qcow2
+*.ova
+
+# Android Studio *.iml and .idea/workspace.xml files should not be committed
+# as they often contain user-specific settings and configurations
+
+# Keystore files
+*.jks
+*.keystore
+
+# Signing files
+signingConfigs/
+
+# Android Studio generated files
+captured/
+
+# Lint files
+lint-results/
+lint.xml
+
+# External native build folder generated in Android Studio 2.2 and later
+.externalNativeBuild/
+
+# Google Services (e.g. google-services.json)
+google-services.json
+
+# Crashlytics
+com_crashlytics_export_strings.xml
+
+# Fastlane
+fastlane/report.xml
+fastlane/Preview.html
+fastlane/screenshots
+fastlane/test_output
+
+# Navigation Editor
+.navigation/
+
+# Flutter/Dart-specific
+**/ios/Flutter/
+**/.dart_tool/
+**/.flutter-plugins
+**/.flutter-plugins-dependencies
+**/android/gradlewrapper/gradle-wrapper.jar
+**/.pub-cache/
+**/lib/generated_plugin_registrant.dart
+
+# Visual Studio Code related
+.vscode/
+*.code-workspace
+
+# Windows image file caches
+Thumbs.db
+ehthumbs.db
+
+# Folder config file
+Desktop.ini
+
+# Recycle Bin used on file shares
+$RECYCLE.BIN/
+
+# macOS files
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Icon must end with two \r
+Icon
+^
+
+# Thumbnails
+._*
+
+# Files that might appear on external disks
+.Spotlight-V100
+.Trashes
+
+# Compiled Object files
+*.slo
+*.lo
+*.o
+*.obj
+
+# Compiled Dynamic libraries
+*.so
+*.dylib
+*.dll
+
+# Compiled Static libraries
+*.lai
+*.la
+*.a
+*.lib
+
+# Executables
+*.exe
+*.out
+*.app
+
